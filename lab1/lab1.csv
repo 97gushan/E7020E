@@ -1,0 +1,13 @@
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+1;"U2";"LQFP-64_10x10mm_P0.5mm";1;"STM32F411RETx";;;
+2;"C1,C2,C3,C4,C5,C7,C8,C12,C15,C16";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";10;"100n";;;
+3;"C6,C13";"CP_Elec_4x5.4";2;"10u";;;
+4;"C9";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";1;"4.7u";;;
+5;"C10,C11";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";2;"18p";;;
+6;"C14";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";1;"1u";;;
+7;"J1";"USB_Mini-B_Wuerth_65100516121_Horizontal";1;"USB_OTG";;;
+8;"J2";"PinHeader_1x06_P2.54mm_Horizontal";1;"Conn_01x06_Male";;;
+9;"R1,R2";"R_0805_2012Metric_Pad1.15x1.40mm_HandSolder";2;"10k";;;
+10;"R3,R4";"R_0805_2012Metric_Pad1.15x1.40mm_HandSolder";2;"R";;;
+11;"U1";"SOT-223";1;"LM1117ADJ";;;
+12;"Y1";"Crystal_HC49-U_Vertical";1;"8.0MHz";;;
