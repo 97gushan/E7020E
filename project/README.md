@@ -37,8 +37,14 @@ To prevent malformed packages we poll data from the sensor during a short interv
 
 The system uses very non personal data thus encryption is not needed.
 
+## Components
 
-# Components
+- Ultrasonic distance sensor
+- OLED screen
+- Speaker
+- LED
+- Button
+- Antenna
 
 ## Ultrasonic distance sensor
 
@@ -46,13 +52,19 @@ Here we will provide some links to potential components to order, each component
 
 ### [DEBO SEN ULTRA](https://www.elfa.se/en/ultrasonic-distance-sensor-raspberry-pi-debo-sen-ultra/p/30036820?q=Ultrasonic+distance+sensor&pos=1&origPos=1&origPageSize=10&track=true)
 
-* Distance range: 0.3...4m
-* 30 degree angle
-* 62,10 SEK
-* 5V DC 
-* 15mA 
+- Distance range: 0.3...4m
+- 30 degree angle
+- 62,10 SEK
+- 5V DC
+- 15mA
+
+## [OLED screen](https://cdon.se/hem-tradgard/oled-display-0-96-tum-vit-128x64-pixlar-ssd1306-spi-p50506639)
+
+## [Speaker]{https://www.elfa.se/en/electromechanical-buzzer-70db-3khz-4v-pcb-pins-rnd-components-rnd-430-00022/p/30160669?q=*&pos=3&origPos=10&origPageSize=10&track=true}
 
 
+
+<!-- 
 ### [SEN-15569 - HC-SR04](https://www.elfa.se/en/hc-sr04-ultrasonic-distance-sensor-sparkfun-electronics-sen-15569/p/30160395?q=Ultrasonic+distance+sensor&pos=2&origPos=2&origPageSize=10&track=true)
 
 * Distance range: 0.02...4m (Might be wrong unit, 0.2 seems more reasonable...)
@@ -75,6 +87,4 @@ Here we will provide some links to potential components to order, each component
 * 15 degree angle
 * 67,10 SEK
 * 3-5V DC 
-* 2mA (Would depend on the voltage suplied..?) 
-
-
+* 2mA (Would depend on the voltage suplied..?) -->
