@@ -60,7 +60,23 @@ Here we will provide some links to potential components to order, each component
 
 ## [OLED screen](https://cdon.se/hem-tradgard/oled-display-0-96-tum-vit-128x64-pixlar-ssd1306-spi-p50506639)
 
-## [Speaker]{https://www.elfa.se/en/electromechanical-buzzer-70db-3khz-4v-pcb-pins-rnd-components-rnd-430-00022/p/30160669?q=*&pos=3&origPos=10&origPageSize=10&track=true}
+## [Speaker](https://www.elfa.se/en/electromechanical-buzzer-70db-3khz-4v-pcb-pins-rnd-components-rnd-430-00022/p/30160669?q=*&pos=3&origPos=10&origPageSize=10&track=true)
+
+## Headers
+
+### [2 pin male](https://se.rs-online.com/web/p/pcb-headers/2518086/)
+
+###[5 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00645/p/30093665?q=pcb+headers&pos=1&origPos=388&origPageSize=10&track=true)
+
+###[6 pin male](https://www.elfa.se/en/straight-male-pcb-header-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00627/p/30093647?q=pcb+headers&pos=9&origPos=868&origPageSize=10&track=true)
+
+###[7 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00647/p/30093667?q=pcb+headers&pos=2&origPos=397&origPageSize=10&track=true)
+
+##[USB-connector](https://se.rs-online.com/web/p/micro-usb-connectors/1225099/)
+
+
+
+
 
 
 
