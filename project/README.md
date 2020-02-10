@@ -66,13 +66,13 @@ Here we will provide some links to potential components to order, each component
 
 ### [2 pin male](https://se.rs-online.com/web/p/pcb-headers/2518086/)
 
-###[5 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00645/p/30093665?q=pcb+headers&pos=1&origPos=388&origPageSize=10&track=true)
+### [5 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00645/p/30093665?q=pcb+headers&pos=1&origPos=388&origPageSize=10&track=true)
 
-###[6 pin male](https://www.elfa.se/en/straight-male-pcb-header-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00627/p/30093647?q=pcb+headers&pos=9&origPos=868&origPageSize=10&track=true)
+### [6 pin male](https://www.elfa.se/en/straight-male-pcb-header-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00627/p/30093647?q=pcb+headers&pos=9&origPos=868&origPageSize=10&track=true)
 
-###[7 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00647/p/30093667?q=pcb+headers&pos=2&origPos=397&origPageSize=10&track=true)
+### [7 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00647/p/30093667?q=pcb+headers&pos=2&origPos=397&origPageSize=10&track=true)
 
-##[USB-connector](https://se.rs-online.com/web/p/micro-usb-connectors/1225099/)
+## [USB-connector](https://se.rs-online.com/web/p/micro-usb-connectors/1225099/)
 
 
 
