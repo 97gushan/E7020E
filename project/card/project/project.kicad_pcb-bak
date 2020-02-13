@@ -1307,7 +1307,7 @@
     (tags "mcrf hirose ufl u.fl microcoaxial")
     (path /5E401EE4)
     (attr smd)
-    (fp_text reference J5 (at -3.4 -0.3 90) (layer F.SilkS)
+    (fp_text reference ANT (at -3.4 -0.3 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value Conn_Coaxial (at 0 -3.302) (layer F.Fab)
