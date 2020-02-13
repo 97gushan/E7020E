@@ -1,0 +1,143 @@
+.HEA
+.TIM mån 10 feb 2020 08:41:14
+.APP "Eeschema 5.1.5-52549c5~84~ubuntu18.04.1"
+
+.ADD_COM U2 CMWX1ZZABZ-078  RF_Module:CMWX1ZZABZ
+.ADD_COM C13 10u  Capacitor_SMD:CP_Elec_5x4.5
+.ADD_COM C11 1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C9 0.1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C15 1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C6 10u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C5 0.1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM R1 10k  Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM SW1 SW_Push  Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm
+.ADD_COM C2 0.1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM J2 Conn_01x06_Male  Connector_Molex:Molex_KK-254_AE-6410-06A_1x06_P2.54mm_Vertical
+.ADD_COM J1 USB_OTG  Connector_USB:USB_Micro-B_Wuerth_629105150521
+.ADD_COM C1 100n  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C3 100n  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C4 10u  Capacitor_SMD:CP_Elec_5x4.5
+.ADD_COM C7 100n  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM C8 10u  Capacitor_SMD:CP_Elec_5x4.5
+.ADD_COM R2 1k  Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM R3 1.65k  Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM J3 Conn_01x02_Male  Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical
+.ADD_COM J5 Conn_Coaxial  Connector_Coaxial:U.FL_Molex_MCRF_73412-0110_Vertical
+.ADD_COM C12 100p  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM D1 LED  LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM LS1 Speaker_Crystal  Buzzer_Beeper:Buzzer_15x7.5RM7.6
+.ADD_COM J6 Conn_01x07_Female  Connector_Molex:Molex_KK-254_AE-6410-07A_1x07_P2.54mm_Vertical
+.ADD_COM SW2 SW_Push  Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm
+.ADD_COM C10 0.1u  Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+.ADD_COM U1 LM1117ADJ  Package_TO_SOT_SMD:SOT-223
+.ADD_COM J7 Conn_01x05_Female  Connector_Molex:Molex_KK-254_AE-6410-05A_1x05_P2.54mm_Vertical
+
+
+.ADD_TER U2.57  GND
+.TER     C9.2
+         C11.2
+         C13.2
+         U2.7
+         U2.56
+         U2.55
+         U2.54
+         U2.53
+         C6.2
+         C15.2
+         U2.52
+         U2.3
+         U2.27
+         J7.5
+         J7.4
+         U2.25
+         C10.1
+         SW2.2
+         R1.2
+         C5.2
+         C2.1
+         SW1.1
+         U2.51
+         U2.50
+         U2.49
+         U2.44
+         J1.6
+         J1.5
+         J2.3
+         C8.2
+         C7.2
+         C4.2
+         C3.2
+         C1.2
+         J5.2
+         R3.2
+         D1.1
+         LS1.2
+         J6.1
+.ADD_TER J7.2  /trig
+.TER     U2.22
+.ADD_TER U2.26  Net-(C12-Pad2)
+.TER     C12.2
+.ADD_TER C12.1  Net-(C12-Pad1)
+.TER     J5.1
+.ADD_TER U2.18  Net-(J3-Pad2)
+.TER     J3.2
+.ADD_TER U2.36  /DataCom
+.TER     J6.6
+.ADD_TER U2.35  /Reset
+.TER     J6.5
+.ADD_TER U2.17  /NSS
+.TER     J6.7
+.ADD_TER U2.16  Net-(J6-Pad3)
+.TER     J6.3
+.ADD_TER U2.19  Net-(J3-Pad1)
+.TER     J3.1
+.ADD_TER J6.4  Net-(J6-Pad4)
+.TER     U2.14
+.ADD_TER C15.1  +3V3
+.TER     U2.4
+         J2.1
+         U2.48
+         J6.2
+         U2.5
+         C8.1
+         C7.1
+         U2.32
+         C5.1
+         R2.1
+         J7.1
+         C11.1
+         U1.4
+         U1.2
+         C13.1
+         C6.1
+         U2.6
+         C9.1
+.ADD_TER U1.3  +5V
+.TER     C1.1
+         C4.1
+         C3.1
+         J1.1
+.ADD_TER U1.1  Net-(R2-Pad2)
+.TER     R3.1
+         R2.2
+.ADD_TER J2.2  Net-(J2-Pad2)
+.TER     U2.42
+.ADD_TER U2.21  /echo
+.TER     J7.3
+.ADD_TER U2.37  /Btn
+.TER     C10.2
+         SW2.1
+.ADD_TER D1.2  /LED
+.TER     U2.39
+.ADD_TER LS1.1  /Piezo
+.TER     U2.40
+.ADD_TER U2.41  Net-(J2-Pad4)
+.TER     J2.4
+.ADD_TER R1.1  Net-(R1-Pad1)
+.TER     U2.43
+.ADD_TER J2.5  Net-(C2-Pad2)
+.TER     C2.2
+         U2.34
+         SW1.2
+
+.END
