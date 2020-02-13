@@ -74,6 +74,8 @@ Here we will provide some links to potential components to order, each component
 
 ## [USB-connector](https://se.rs-online.com/web/p/micro-usb-connectors/1225099/)
 
+##[Potentiometer](https://www.elfa.se/en/rotary-potentiometer-kohm-bourns-3310y-001-102l/p/30115414?q=potentiometer+3310&pos=1&origPos=3&origPageSize=10&track=true/)
+
 
 
 
