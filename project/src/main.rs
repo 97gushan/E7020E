@@ -47,7 +47,7 @@ const APP: () = {
         let gpiob = device.GPIOB.split(&mut rcc);
         let gpioc = device.GPIOC.split(&mut rcc);
 
-        let mut timer = device.TIM2.timer(440.hz(), &mut rcc);
+        let mut timer = device.TIM2.timer(4.hz(), &mut rcc);
         timer.listen();
 
         let exti = device.EXTI;
@@ -87,20 +87,7 @@ const APP: () = {
         adc.set_sample_time(adc::SampleTime::T_39_5);
         hprintln!("Hello, world!").unwrap();
 
-        // let pwm = pwm::Timer::new(device.TIM2, 1.khz(), &mut rcc);
-        // let mut pwm = pwm.channel1.assign(gpioa.pa5);
-        // let max_duty = pwm.get_max_duty();
-        // pwm.enable();
 
-       
-
-        // let pwm = pwm::Timer::new(device.TIM2, 10.khz(), &mut rcc);
-        // let mut pwm = pwm.channel1.assign(gpioa.pa5);
-        // let max_duty = pwm.get_max_duty() / 4095;
-        // pwm.enable();
-
-
-        // pwm.set_duty(max_duty*5/4);
         // Return the initialised resources.
         init::LateResources {
             INT: exti,
@@ -113,10 +100,14 @@ const APP: () = {
         }
     }
 
-    #[interrupt(priority = 1, resources = [SX1276_DIO0, INT], spawn = [button_event])]
+    #[interrupt(priority = 3, resources = [SX1276_DIO0, INT], spawn = [button_event])]
     fn EXTI2_3() {
         hprintln!("{}", resources.SX1276_DIO0.pin_number()).unwrap();
-        resources.INT.clear_irq(resources.SX1276_DIO0.pin_number());
+        
+        let mut int = resources.INT;
+        let mut led = resources.SX1276_DIO0;
+
+        int.clear_irq(led.pin_number());
         spawn.button_event().unwrap();
     }
 
@@ -132,10 +123,6 @@ const APP: () = {
         }
 
         hprintln!("button event").unwrap();
-
-        // let mut pot = resources.POT;
-
-        
     }
 
     #[interrupt(priority= 2, resources = [BUZZER, TIMER])]
