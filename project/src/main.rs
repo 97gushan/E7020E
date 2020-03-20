@@ -8,39 +8,46 @@ extern crate stm32l0xx_hal;
 
 use hal::{
     exti::TriggerEdge,
+    delay::Delay,
     gpio::*,
     pac,
     prelude::*,
     rcc::Config,
-    spi,
+    spi::{self, Mode, NoMiso, Phase, Polarity},
     syscfg,
 };
 use stm32l0xx_hal as hal;
-use communicator::{Message, Channel};
+// use communicator::{Message, Channel};
 use heapless::consts::*;
 use cortex_m_semihosting::hprintln;
 
+use ssd1306::{mode::TerminalMode, prelude::*, Builder};
 
-#[rtfm::app(device = stm32l0xx_hal::pac)]
+#[rtfm::app(device = stm32l0xx_hal::pac, peripherals = true)]
 const APP: () = {
-    static mut INT: pac::EXTI = ();
-    static mut SX1276_DIO0: gpiob::PB2<Input<PullUp>> = ();
-    static mut LED: gpiob::PB6<Output<PushPull>> = ();
-    static mut STATE: bool = false;
+
+    struct Resources {
+        INT: pac::EXTI,
+        SX1276_DIO0: gpiob::PB2<Input<PullUp>>,
+        LED: gpiob::PB6<Output<PushPull>>,
+        
+        #[init(false)]
+        STATE: bool,
+    }
 
     #[init()]
-    fn init() -> init::LateResources {
+    fn init(cx: init::Context) -> init::LateResources {
         // Configure the clock.
-        let mut rcc = device.RCC.freeze(Config::hsi16());
-        let mut syscfg = syscfg::SYSCFG::new(device.SYSCFG, &mut rcc);
+        let mut rcc = cx.device.RCC.freeze(Config::hsi16());
+        let mut syscfg = syscfg::SYSCFG::new(cx.device.SYSCFG, &mut rcc);
 
         // Acquire the GPIOB peripheral. This also enables the clock for GPIOB in
         // the RCC register.
-        let gpioa = device.GPIOA.split(&mut rcc);
-        let gpiob = device.GPIOB.split(&mut rcc);
-        let gpioc = device.GPIOC.split(&mut rcc);
+        let gpioa = cx.device.GPIOA.split(&mut rcc);
+        let gpiob = cx.device.GPIOB.split(&mut rcc);
+        let gpioc = cx.device.GPIOC.split(&mut rcc);
 
-        let exti = device.EXTI;
+        let exti = cx.device.EXTI;
         
 
         // Configure PB4 as input.
@@ -53,16 +60,61 @@ const APP: () = {
             TriggerEdge::Rising,
         );
 
-        let sck = gpiob.pb3;
-        let miso = gpioa.pa6;
-        let mosi = gpioa.pa7;
-        let nss = gpioa.pa15.into_push_pull_output();
+        let sck = gpiob.pb13;
+        let mosi = gpiob.pb15;
+        let nss = gpiob.pb12.into_push_pull_output();
+        let dc = gpiob.pb9.into_push_pull_output();
+        let mut res = gpiob.pb8.into_push_pull_output();
 
-        // Initialise the SPI peripheral.
-        let mut _spi = device
-            .SPI1
-            .spi((sck, miso, mosi), spi::MODE_0, 1_000_000.hz(), &mut rcc);
+        // Initialise the SPI peripheral.   
+        let mut spi =
+                    cx.device
+                        .SPI2
+                        .spi((sck, NoMiso, mosi), 
+                        spi::MODE_0, 1_000_000.hz(), &mut rcc);
 
+
+
+        let mut delay = Delay::new(cx.core.SYST, rcc.clocks);
+
+        let mut disp: TerminalMode<_> = Builder::new().connect_spi(spi, dc).into();
+
+        disp.reset(&mut res, &mut delay).unwrap();
+        disp.init().unwrap();
+
+        // disp.clear();
+
+        disp.print_char('T');
+        disp.print_char('T');
+
+        disp.print_char('T');
+
+        disp.print_char('T');
+
+
+        // disp.set_pixel(0, 0, 1);
+        // disp.set_pixel(1, 0, 1);
+        // disp.set_pixel(2, 0, 1);
+        // disp.set_pixel(3, 0, 1);
+    
+        // // Right side
+        // disp.set_pixel(3, 0, 1);
+        // disp.set_pixel(3, 1, 1);
+        // disp.set_pixel(3, 2, 1);
+        // disp.set_pixel(3, 3, 1);
+    
+        // // Bottom side
+        // disp.set_pixel(0, 3, 1);
+        // disp.set_pixel(1, 3, 1);
+        // disp.set_pixel(2, 3, 1);
+        // disp.set_pixel(3, 3, 1);
+    
+        // // Left side
+        // disp.set_pixel(0, 0, 1);
+        // disp.set_pixel(0, 1, 1);
+        // disp.set_pixel(0, 2, 1);
+        // disp.set_pixel(0, 3, 1);
+        disp.flush().unwrap();
 
         // Configure PB5 as output.
         let mut led = gpiob.pb6.into_push_pull_output();
@@ -78,22 +130,22 @@ const APP: () = {
         }
     }
 
-    #[interrupt(priority = 1, resources = [SX1276_DIO0, INT], spawn = [button_event])]
-    fn EXTI2_3() {
-        hprintln!("{}", resources.SX1276_DIO0.pin_number()).unwrap();
-        resources.INT.clear_irq(resources.SX1276_DIO0.pin_number());
-        spawn.button_event().unwrap();
+    #[task(binds = EXTI2_3, priority = 1, resources = [SX1276_DIO0, INT], spawn = [button_event])]
+    fn exti2_3(cx: exti2_3::Context) {
+        hprintln!("{}", cx.resources.SX1276_DIO0.pin_number()).unwrap();
+        cx.resources.INT.clear_irq(cx.resources.SX1276_DIO0.pin_number());
+        cx.spawn.button_event().unwrap();
     }
 
     #[task(capacity = 4, priority = 2, resources = [LED, STATE])]
-    fn button_event() {
+    fn button_event(cx: button_event::Context) {
 
-        if(*resources.STATE) {
-            resources.LED.set_high().unwrap();
-            *resources.STATE = false;
+        if(*cx.resources.STATE) {
+            cx.resources.LED.set_high().unwrap();
+            *cx.resources.STATE = false;
         } else {
-            resources.LED.set_low().unwrap();
-            *resources.STATE = true;
+            cx.resources.LED.set_low().unwrap();
+            *cx.resources.STATE = true;
         }
 
         hprintln!("button event").unwrap();
