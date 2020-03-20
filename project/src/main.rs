@@ -82,14 +82,25 @@ const APP: () = {
         disp.reset(&mut res, &mut delay).unwrap();
         disp.init().unwrap();
 
-        // disp.clear();
+        disp.clear();
 
-        disp.print_char('T');
-        disp.print_char('T');
+        disp.print_char('G');
+        disp.print_char('o');
 
-        disp.print_char('T');
+        disp.print_char('d');
 
-        disp.print_char('T');
+        disp.print_char('s');
+        disp.print_char('p');
+        disp.print_char('e');
+        disp.print_char('e');
+        disp.print_char('d');
+        disp.print_char('!');
+
+
+
+
+
+
 
 
         // disp.set_pixel(0, 0, 1);
