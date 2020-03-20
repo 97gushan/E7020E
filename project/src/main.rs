@@ -83,8 +83,8 @@ const APP: () = {
         let mut buzzer = gpiob.pb5.into_push_pull_output();
         let mut adc = device.ADC.constrain(&mut rcc);
 
-        adc.set_precision(adc::Precision::B_12);
-        adc.set_sample_time(adc::SampleTime::T_39_5);
+        // adc.set_precision(adc::Precision::B_12);
+        // adc.set_sample_time(adc::SampleTime::T_39_5);
         hprintln!("Hello, world!").unwrap();
 
 
@@ -121,6 +121,9 @@ const APP: () = {
             resources.LED.set_low().unwrap();
             *resources.STATE = true;
         }
+
+        let val: u16 = resources.ADC.read(resources.POT).unwrap();
+        hprintln!("addc: {:?}", val);
 
         hprintln!("button event").unwrap();
     }
