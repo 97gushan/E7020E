@@ -6,7 +6,7 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-cortex-m-rtfm = "0.4.3"
+cortex-m-rtfm = "0.5.1"
 cortex-m = "0.6.2"
 embedded-hal = "0.2.3"
 panic-semihosting = "0.5.3"
@@ -18,8 +18,13 @@ cobs = { version = "0.1.4", default-features = false }
 crc16 = "0.4.0"
 heapless = "0.5.1"
 postcard = "0.4.2"
-longfi-device = { git = "https://git.grepit.se/grepit/lora-rs.git" }
-communicator = { git = "https://git.grepit.se/grepit/communicator.git" }
+
+[dependencies.ssd1306]
+version = "=0.3.0-alpha.4"
+features = [ "graphics" ]
+
+[dependencies.embedded-graphics]
+version = "=0.6.0-alpha.3"
 
 [profile.dev]
 # The UART RX seems to be too slow on `-O0`, so messages never get through.
@@ -27,6 +32,3 @@ opt-level = 1
 
 [profile.release]
 debug = true
-
-[patch.'https://git.grepit.se/grepit/lora-rs.git']
-longfi-device = { git = "https://git.grepit.se/viktor.sonesten/lora-rs.git", branch = "ltu-es" }
