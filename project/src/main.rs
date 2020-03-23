@@ -15,6 +15,9 @@ use hal::{
     rcc::Config,
     spi::{self, Mode, NoMiso, Phase, Polarity},
     syscfg,
+    adc,
+    pwm,
+    timer::Timer,
 };
 use stm32l0xx_hal as hal;
 // use communicator::{Message, Channel};
@@ -29,7 +32,11 @@ const APP: () = {
         INT: pac::EXTI,
         SX1276_DIO0: gpiob::PB2<Input<PullUp>>,
         LED: gpiob::PB6<Output<PushPull>>,
-        
+        POT: gpioa::PA4<Analog>,
+        ADC: adc::Adc,
+        TIMER: Timer<pac::TIM2>,
+        BUZZER: gpiob::PB5<Output<PushPull>>,
+
         #[init(false)]
         STATE: bool,
     }
@@ -47,8 +54,10 @@ const APP: () = {
         let gpioc = cx.device.GPIOC.split(&mut rcc);
 
         let exti = cx.device.EXTI;
-        
 
+        let mut timer = cx.device.TIM2.timer(4.hz(), &mut rcc);
+        timer.listen();
+        
         // Configure PB4 as input.
         let sx1276_dio0 = gpiob.pb2.into_pull_up_input();
         // Configure the external interrupt on the falling edge for the pin 2.
@@ -98,6 +107,11 @@ const APP: () = {
         let mut led = gpiob.pb6.into_push_pull_output();
         led.set_low().ok();
 
+
+        let pot = gpioa.pa4.into_analog();
+        let buzzer = gpiob.pb5.into_push_pull_output();
+        let adc = cx.device.ADC.constrain(&mut rcc);
+
         hprintln!("Hello, world!").unwrap();
 
         // Return the initialised resources.
@@ -105,6 +119,10 @@ const APP: () = {
             INT: exti,
             SX1276_DIO0: sx1276_dio0,
             LED: led,
+            POT: pot,
+            ADC: adc,
+            TIMER: timer,
+            BUZZER: buzzer,
         }
     }
 
@@ -115,10 +133,10 @@ const APP: () = {
         cx.spawn.button_event().unwrap();
     }
 
-    #[task(capacity = 4, priority = 2, resources = [LED, STATE])]
+    #[task(capacity = 4, priority = 2, resources = [LED, STATE, POT, ADC])]
     fn button_event(cx: button_event::Context) {
 
-        if(*cx.resources.STATE) {
+        if *cx.resources.STATE {
             cx.resources.LED.set_high().unwrap();
             *cx.resources.STATE = false;
         } else {
@@ -126,7 +144,23 @@ const APP: () = {
             *cx.resources.STATE = true;
         }
 
+        let val: u16 = cx.resources.ADC.read(cx.resources.POT).unwrap();
+        hprintln!("addc: {:?}", val).unwrap();
+
         hprintln!("button event").unwrap();
+    }
+
+    #[task(binds = TIM2, priority= 2, resources = [BUZZER, TIMER])]
+    fn tim2(cx: tim2::Context) {
+        // Clear the interrupt flag.
+        cx.resources.TIMER.clear_irq();
+
+        // Change the LED state on each interrupt.
+        if cx.resources.BUZZER.is_set_high().unwrap() {
+            cx.resources.BUZZER.set_low().unwrap();
+        } else {
+            cx.resources.BUZZER.set_high().unwrap();
+        }
     }
     // Interrupt handlers used to dispatch software tasks
     extern "C" {
