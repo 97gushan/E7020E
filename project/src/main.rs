@@ -18,7 +18,6 @@ use hal::{
 };
 use stm32l0xx_hal as hal;
 // use communicator::{Message, Channel};
-use heapless::consts::*;
 use cortex_m_semihosting::hprintln;
 
 use ssd1306::{mode::TerminalMode, prelude::*, Builder};
@@ -62,13 +61,12 @@ const APP: () = {
 
         let sck = gpiob.pb13;
         let mosi = gpiob.pb15;
-        let nss = gpiob.pb12.into_push_pull_output();
+        let _nss = gpiob.pb12.into_push_pull_output();
         let dc = gpiob.pb9.into_push_pull_output();
         let mut res = gpiob.pb8.into_push_pull_output();
 
         // Initialise the SPI peripheral.   
-        let mut spi =
-                    cx.device
+        let spi = cx.device
                         .SPI2
                         .spi((sck, NoMiso, mosi), 
                         spi::MODE_0, 1_000_000.hz(), &mut rcc);
@@ -82,49 +80,18 @@ const APP: () = {
         disp.reset(&mut res, &mut delay).unwrap();
         disp.init().unwrap();
 
-        disp.clear();
+        disp.clear().unwrap();
 
-        disp.print_char('G');
-        disp.print_char('o');
+        disp.print_char('G').unwrap();
+        disp.print_char('o').unwrap();
+        disp.print_char('d').unwrap();
+        disp.print_char('s').unwrap();
+        disp.print_char('p').unwrap();
+        disp.print_char('e').unwrap();
+        disp.print_char('e').unwrap();
+        disp.print_char('d').unwrap();
+        disp.print_char('!').unwrap();
 
-        disp.print_char('d');
-
-        disp.print_char('s');
-        disp.print_char('p');
-        disp.print_char('e');
-        disp.print_char('e');
-        disp.print_char('d');
-        disp.print_char('!');
-
-
-
-
-
-
-
-
-        // disp.set_pixel(0, 0, 1);
-        // disp.set_pixel(1, 0, 1);
-        // disp.set_pixel(2, 0, 1);
-        // disp.set_pixel(3, 0, 1);
-    
-        // // Right side
-        // disp.set_pixel(3, 0, 1);
-        // disp.set_pixel(3, 1, 1);
-        // disp.set_pixel(3, 2, 1);
-        // disp.set_pixel(3, 3, 1);
-    
-        // // Bottom side
-        // disp.set_pixel(0, 3, 1);
-        // disp.set_pixel(1, 3, 1);
-        // disp.set_pixel(2, 3, 1);
-        // disp.set_pixel(3, 3, 1);
-    
-        // // Left side
-        // disp.set_pixel(0, 0, 1);
-        // disp.set_pixel(0, 1, 1);
-        // disp.set_pixel(0, 2, 1);
-        // disp.set_pixel(0, 3, 1);
         disp.flush().unwrap();
 
         // Configure PB5 as output.
