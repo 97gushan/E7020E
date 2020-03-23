@@ -30,7 +30,7 @@ const APP: () = {
     static mut SX1276_DIO0: gpiob::PB2<Input<PullUp>> = ();
     static mut LED: gpiob::PB6<Output<PushPull>> = ();
     static mut STATE: bool = false;
-    static mut POT: gpioa::PA2<Analog> = ();
+    static mut POT: gpioa::PA4<Analog> = ();
     static mut ADC: adc::Adc = ();
     static mut TIMER: Timer<pac::TIM2> = ();
     static mut BUZZER: gpiob::PB5<Output<PushPull>> = ();
@@ -52,7 +52,6 @@ const APP: () = {
 
         let exti = device.EXTI;
         
-
         // Configure PB4 as input.
         let sx1276_dio0 = gpiob.pb2.into_pull_up_input();
         // Configure the external interrupt on the falling edge for the pin 2.
@@ -79,14 +78,11 @@ const APP: () = {
         led.set_low().ok();
 
 
-        let mut pot = gpioa.pa2.into_analog();
-        let mut buzzer = gpiob.pb5.into_push_pull_output();
-        let mut adc = device.ADC.constrain(&mut rcc);
+        let pot = gpioa.pa4.into_analog();
+        let buzzer = gpiob.pb5.into_push_pull_output();
+        let adc = device.ADC.constrain(&mut rcc);
 
-        // adc.set_precision(adc::Precision::B_12);
-        // adc.set_sample_time(adc::SampleTime::T_39_5);
         hprintln!("Hello, world!").unwrap();
-
 
         // Return the initialised resources.
         init::LateResources {
@@ -104,8 +100,8 @@ const APP: () = {
     fn EXTI2_3() {
         hprintln!("{}", resources.SX1276_DIO0.pin_number()).unwrap();
         
-        let mut int = resources.INT;
-        let mut led = resources.SX1276_DIO0;
+        let int = resources.INT;
+        let led = resources.SX1276_DIO0;
 
         int.clear_irq(led.pin_number());
         spawn.button_event().unwrap();
@@ -114,7 +110,7 @@ const APP: () = {
     #[task(capacity = 4, priority = 2, resources = [LED, STATE, POT, ADC])]
     fn button_event() {
 
-        if(*resources.STATE) {
+        if *resources.STATE {
             resources.LED.set_high().unwrap();
             *resources.STATE = false;
         } else {
@@ -123,7 +119,7 @@ const APP: () = {
         }
 
         let val: u16 = resources.ADC.read(resources.POT).unwrap();
-        hprintln!("addc: {:?}", val);
+        hprintln!("addc: {:?}", val).unwrap();
 
         hprintln!("button event").unwrap();
     }
