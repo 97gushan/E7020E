@@ -7,6 +7,34 @@ Gustav Hansson
 
 Parking sensor using an ultra sound sensor for measuring distance.
 
+## Dependencies
+
+- Rust 1.40, or later.
+
+``` console
+        > rustup update
+        > rustup target add thumbv7em-none-eabihf
+```
+
+- For programming (flashing) and debugging
+  - `openocd` debug host, (install using your package manager).
+
+    For `Ubuntu` and `OSX`: use `source [find interface/stlink-v2-1.cfg]` in the `openocd.cfg` and the `.vscode/launch.json` if VSCode is used.
+
+    For other operating systems use `source [find interface/stlink.cfg]`
+
+  - `arm-none-eabi` tool-chain (install using your package manager).
+
+- Configure your Nucleo programmer, [Datasheet with how to configure](https://www.st.com/content/ccc/resource/technical/document/user_manual/98/2e/fa/4b/e0/82/43/b7/DM00105823.pdf/files/DM00105823.pdf/jcr:content/translations/en.DM00105823.pdf)
+
+## Run
+
+- Connect the SWD pins from the Nucleo to the respective pins on the card
+- run `openocd -f openocd.cfg` from the project folder, the same that this file is in.
+- run `cargo run`.
+
+Tried on Ubuntu 19 and Arch
+
 ## Specs
 
 ### Purpose
@@ -52,11 +80,11 @@ Here we will provide some links to potential components to order, each component
 
 ### [4019 - US-100](https://www.elfa.se/en/us-100-ultrasonic-distance-sensor-5v-adafruit-4019/p/30139213?q=Ultrasonic+distance+sensor&pos=4&origPos=4&origPageSize=10&track=true)
 
-* Distance range: 0.02...4.5m
-* 15 degree angle
-* 67,10 SEK
-* 3-5V DC 
-* 2mA (Would depend on the voltage suplied..?) 
+- Distance range: 0.02...4.5m
+- 15 degree angle
+- 67,10 SEK
+- 3-5V DC
+- 2mA (Would depend on the voltage suplied..?)
 
 ## [OLED screen](https://cdon.se/hem-tradgard/oled-display-0-96-tum-vit-128x64-pixlar-ssd1306-spi-p50506639)
 
@@ -73,12 +101,3 @@ Here we will provide some links to potential components to order, each component
 ### [7 pin female](https://www.elfa.se/en/straight-female-pcb-receptacle-through-hole-rows-contacts-54mm-pitch-rnd-connect-rnd-205-00647/p/30093667?q=pcb+headers&pos=2&origPos=397&origPageSize=10&track=true)
 
 ## [USB-connector](https://se.rs-online.com/web/p/micro-usb-connectors/1225099/)
-
-
-
-
-
-
-
-
-
