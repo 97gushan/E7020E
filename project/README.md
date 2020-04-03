@@ -35,6 +35,14 @@ Parking sensor using an ultra sound sensor for measuring distance.
 
 Tried on Ubuntu 19 and Arch
 
+## Assumptions (brasklapp)
+
+We could not get the distance sensor to work so we did the following work around.
+
+We used the value that the potentiometer returns to act as the distance to the object, the higher the value the nearer the object is and vice versa. 
+Based on the limited number of timers, 4, the MCU supports we defined three intervals. We could only use three timers to define the frequency because on timer has to be used to turn the piezo element on and off. Far away, near and crash. Each of the intervals correspends to a frequncy the buzzer beeps and also what the OLED screen prints out. 
+
+
 ## Specs
 
 ### Purpose
